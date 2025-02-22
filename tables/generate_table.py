@@ -1,7 +1,7 @@
 import argparse
 import csv
 
-from ..utils.csv import ensure_csv_extension
+from ..utils.files import ensure_file_extension
 
 
 def format_table(headers: str, table_data: str, columns: int, caption: str, table_label: str):
@@ -22,7 +22,7 @@ def format_table(headers: str, table_data: str, columns: int, caption: str, tabl
 
 
 def parse_csv_data(filename, caption=None, label=None):
-    filename = ensure_csv_extension(filename)
+    filename = ensure_file_extension(filename, ".csv")
 
     if not caption:
         caption = f"I'm a caption for {filename}"
@@ -47,6 +47,17 @@ def parse_csv_data(filename, caption=None, label=None):
     return latex_table
 
 
+def create_tex_file(tex_string, filename="output.tex"):
+    filename = ensure_file_extension(filename, ".tex")
+
+    try:
+        with open(filename, "w", encoding="utf-8") as tex_file:
+            tex_file.write(tex_string)
+        print(f"Successfully created LaTeX file: {filename}")
+    except Exception as e:
+        print(f"Error creating LaTeX file: {e}")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Generate a LaTeX table from a csv file")
@@ -56,12 +67,21 @@ def main():
                         help="Caption of LaTeX Table", default=None)
     parser.add_argument("-l", "--label", type=str,
                         help="Label for LaTeX Table", default=None)
+    parser.add_argument("-q", "--quiet", action="store_true",
+                        help="Suppress output file creation.",
+                        default=False)
+
     args = parser.parse_args()
 
     if args.input_file is None:
         raise ValueError("Input file not provided.")
 
-    return parse_csv_data(args.input_file, args.caption, args.label)
+    latex_table = parse_csv_data(args.input_file, args.caption, args.label)
+
+    if not args.quiet:
+        create_tex_file(latex_table, args.input_file)
+
+    return latex_table
 
 
 if __name__ == "__main__":
