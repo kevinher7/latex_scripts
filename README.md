@@ -29,11 +29,7 @@ pip install -r requirements.txt
    ├── tables
    ├── ...
 
-2. Add this directory to your PATH. This can be done from the terminal as
-
-```bash
-set PYTHONPATH=C:\Users\kevin\my-scripts
-```
+2. Add this directory to your PATH.
 
 3. Create a batch script in the directory you created. The name of this file will be the **command name**
 
