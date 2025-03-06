@@ -15,7 +15,7 @@ There are no external dependencies, so just install the required packages from t
 
 ```bash
 # clone the repo into your own folder
-git clone https://github.com/kevinher7/latex_scripts/
+git clone https://github.com/kevinher7/latex_scripts
 cd latex_scripts
 pip install -r requirements.txt
 ```
