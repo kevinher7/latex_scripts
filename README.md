@@ -11,9 +11,12 @@ It is important to mention that modules are accessed through relative imports.
 
 # Installation
 
-There are no external dependencies, so just install the required packages from the `requirements.txt` file
+There are no external dependencies, so just install the required packages from the `requirements.txt` file after cloning the repository
 
 ```bash
+# clone the repo into your own folder
+git clone https://github.com/kevinher7/latex_scripts/
+cd latex_scripts
 pip install -r requirements.txt
 ```
 
